@@ -65,5 +65,9 @@ function addContent(products) {
 // on écoute sur le bouton
 const targetButton = document.getElementById("addToCart");
 targetButton.addEventListener('click', (event) => {
-    
+    event.preventDefault();
+    //on assigne la couleur et la quantité choisies
+    // à leurs variables respectives
+    const productColor = document.getElementById("colors").value;
+    const productQuantite = document.getElementById("quantity").value;
 })
