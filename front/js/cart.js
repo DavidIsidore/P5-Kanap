@@ -189,3 +189,59 @@ const addressInput = document.getElementById("address");
 const cityInput = document.getElementById("city");
 const emailInput = document.getElementById("email");
 
+// Récupération des valeurs des champs de saisie
+const firstName = firstNameInput.value;
+const lastName = lastNameInput.value;
+const address = addressInput.value;
+const city = cityInput.value;
+const email = emailInput.value;
+
+// Initialisation des messages d'erreur
+const firstNameErrorMsg = document.getElementById("firstNameErrorMsg");
+const lastNameErrorMsg = document.getElementById("lastNameErrorMsg");
+const addressErrorMsg = document.getElementById("addressErrorMsg");
+const cityErrorMsg = document.getElementById("cityErrorMSg");
+const emailErrorMsg = document.getElementById("emailErrorMSg");
+
+/*-----------------Tests de validité des entrées de  l'utilisateur--------------*/
+// Tous les test sont construits de la même façon
+// les commentaires du premier sont à adapter aux suivants
+
+// Test de validité du prénom
+function validateFirstName(){
+    // si le prénom ne correspond pas au format souhaité
+    if(txtRegex.test(firstName) == true) {
+        // on affiche le message d'erreur
+        firstNameErrorMsg.innerHTML = "Veuillez saisir un format de prénom valide (uniquement des lettres)";
+        return false;
+    }else{
+        return true;
+    }
+}
+
+function validateLastName(){
+    if(txtRegex.test(lastName) == true) {
+        lastNameErrorMsg.innerHTML = "Veuillez saisir un format de nom valide (uniquement des lettres)";
+    }
+}
+
+function validateAddress() {
+    if(addressRegex.test(address) == true) {
+        addressErrorMsg.innerHTML = "Veuillez saisir un format d'adresse valide (lettres et chiffres, pas de symbole spécial)";
+    }
+}
+
+function validateCity() {
+    if(txtRegex.test(city) == true) {
+        cityErrorMsg.innerHTML = "Veuillez saisir un format de nom de ville valide (uniquement des lettres)";
+    }
+}
+
+function validateEmail() {
+    if(emailRegex.test(email) == true) {
+        emailErrorMsg.innerHTML = "Veuillez saisir un format d'adresse mail valide ( exemple@fournisseur.fr)"
+    }
+}
+
+
+
