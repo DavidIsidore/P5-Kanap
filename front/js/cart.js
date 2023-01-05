@@ -243,5 +243,53 @@ function validateEmail() {
     }
 }
 
+/*----------Vérification des données entrées par l'utilisateur------*/
+
+// On place un écouteur d'évènements pour soumettre la validation
+// des données utilisateur au clic sur le bouton
+const order = document.getElementById("order");
+order.addEventListener('click', event => {
+    // on empêche le navigateur de changer de page
+    event.preventDefault();
+    // on passe l'indicateur d'erreur à FAUX
+    let setError = false;
+
+    //Validation du prénom
+    //si le format de prénom n'est pas validé
+    if(!validateFirstName()){
+        // on passe l'indicateur d'erreur à VRAI
+        setError = true;
+    }
+
+    //Validation du nom
+    if(!validateLastName()){
+        setError = true;
+    }
+
+    // Validation de l'adresse
+    if(!validateAddress()) {
+        setError = true;
+    }
+
+    // Validation de la ville
+    if(!validateCity()) {
+        setError = true;
+    }
+
+    // Validation de l'adresse email
+    if(!validateEmail()) {
+        setError = true;
+    }
+
+    // Si une erreur est détectée
+    if(setError){
+        event.preventDefault();
+        // on envoie un message d'erreur en demandant à remplir tous les champs
+        alert("Veuillez remplir tous les champs");
+        return (false);
+    }
+
+})
+
 
 
