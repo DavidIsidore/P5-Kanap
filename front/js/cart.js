@@ -289,6 +289,41 @@ order.addEventListener('click', event => {
         return (false);
     }
 
+
+    /*--------Préparation du message à envoyer au back-end---------*/
+
+    // on initialise un tableau vide
+    //pour y entrer nes id de commande
+    let idCommande = [];
+    // pour chaque article du panier
+    for(i=0;i<panier<length;i++) {
+        // on ajoute l'id de l'article au tableau
+        idCommande.push(panier[i].productid);
+    }
+
+    // on construit le corps de la requête
+    const body = {
+        contact: {
+            firstName : firstNameInput.value,
+            lastName : lastNameInput.value,
+            address : addressInput.value,
+            city : cityInput.value,
+            email : emailInput.value
+        },
+        products : idCOmmande
+    }
+
+    // on prépare les paramètres du fetch
+    let settingsFetch = {
+        method: 'POST',
+        headers: {
+            Accept : "application/json",
+            "Content-type" : "application/json"
+        },
+        body : JSON.stringify(body)
+    }
+    
+
 })
 
 
