@@ -322,7 +322,27 @@ order.addEventListener('click', event => {
         },
         body : JSON.stringify(body)
     }
-    
+
+    /*------------Requête--------------*/
+    // on vérifie si le panier est vide
+    if(idCommande.length == 0){
+        //dans ce cas, on envoie un message à l'utilisateur 
+        alert("Votre panier est vide, veuillez sélectionner un article");
+    }else{
+        // sinon, on envoie la requête au serveur
+        fetch("http://localhost:3000/api/products/order", settingsFetch)
+        //réponse au format json
+        .then((response) => response.json())
+        // traitement des données reçues
+        //récupération du numéro de commande
+        .then((data) => {
+            // on vide le panier
+            localStorage.clear();
+            // on renvoie sur la page de confirmation
+            document.location.href = './confirmation.html?orderId=${order.orderId}';
+        })
+    }
+
 
 })
 
