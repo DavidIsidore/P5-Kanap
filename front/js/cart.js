@@ -11,7 +11,7 @@ totPrice = 0;
 // Calcul de la quantité totale d'articles du panier
 for(n=0;n<panier.length;n++){
     //on incrémente la quantité totale d'articles pour chaque élément présent dans le panier
-    totalQuantite += Number(panier[n].length.quantite);
+    totalQuantite += Number(panier[n].quantite);
 }
 
 /*-------------------Récupération de la liste des produits du back-end-----------------*/
@@ -210,7 +210,7 @@ const emailErrorMsg = document.getElementById("emailErrorMSg");
 // Test de validité du prénom
 function validateFirstName(){
     // si le prénom ne correspond pas au format souhaité
-    if(txtRegex.test(firstName) == true) {
+    if(txtRegex.test(firstName) == false) {
         // on affiche le message d'erreur
         firstNameErrorMsg.innerHTML = "Veuillez saisir un format de prénom valide (uniquement des lettres)";
         return false;
@@ -220,26 +220,38 @@ function validateFirstName(){
 }
 
 function validateLastName(){
-    if(txtRegex.test(lastName) == true) {
+    if(txtRegex.test(lastName) == false) {
         lastNameErrorMsg.innerHTML = "Veuillez saisir un format de nom valide (uniquement des lettres)";
+        return false;
+    }else{
+        return true;
     }
 }
 
 function validateAddress() {
-    if(addressRegex.test(address) == true) {
+    if(addressRegex.test(address) == false) {
         addressErrorMsg.innerHTML = "Veuillez saisir un format d'adresse valide (lettres et chiffres, pas de symbole spécial)";
+        return false;
+    }else{
+        return true;
     }
 }
 
 function validateCity() {
-    if(txtRegex.test(city) == true) {
+    if(txtRegex.test(city) == false) {
         cityErrorMsg.innerHTML = "Veuillez saisir un format de nom de ville valide (uniquement des lettres)";
+        return false;
+    }else{
+        return true;
     }
 }
 
 function validateEmail() {
     if(emailRegex.test(email) == true) {
-        emailErrorMsg.innerHTML = "Veuillez saisir un format d'adresse mail valide ( exemple@fournisseur.fr)"
+        emailErrorMsg.innerHTML = "Veuillez saisir un format d'adresse mail valide ( exemple@fournisseur.fr)";
+        return false;
+    }else{
+        return true;
     }
 }
 
