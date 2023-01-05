@@ -133,3 +133,31 @@ targetButton.addEventListener('click', (event) => {
         }
     }
 });
+
+// fonction d'enregistrement du panier
+function saveBasket(producInLocalStorage){
+    localStorage.setItem("panier",JSON.stringify(producInLocalStorage));
+}
+
+// fonction de récupération du panier
+function getBasket(){
+    // on récupère les informations du panier
+    let producInLocalStorage = localStorage.getItem("panier");
+    if(producInLocalStorage == null){
+        // si le panier était vide, on retourne un tableau vide
+        return [];
+    }else{
+        // sinon, on retourne le contenu du localStorage
+        return JSON.parse(producInLocalStorage);
+    }
+}
+
+// fonction d'ajout au panier
+function addBasket(cart){
+    // on récupère les informations du panier
+    let producInLocalStorage = getBasket();
+    // on ajoute le nouvel article
+    producInLocalStorage.push(cart);
+    // on enregistre le panier
+    saveBasket(producInLocalStorage);
+}
