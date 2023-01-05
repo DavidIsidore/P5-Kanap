@@ -59,3 +59,11 @@ function addContent(products) {
       color.innerHTML += "<option value=" + colors + ">" + colors + "</option>";
     }
   }
+
+/*----------------------Ajout de la sélection d'articles au panier---------------*/
+
+// on écoute sur le bouton
+const targetButton = document.getElementById("addToCart");
+targetButton.addEventListener('click', (event) => {
+    
+})
