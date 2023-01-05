@@ -173,3 +173,19 @@ function changeQty() {
       });
     }
   }
+
+/*--------------------Contrôle des données envoyées par l'utilisateur---------------*/
+
+// Définition des Regex
+const txtRegex = /^[A-Za-z\s]{5,50}/;
+//const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+const emailRegex = /^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$/;
+const addressRegex = /^[A-Za-z0-9\s]{5,50}$/;
+
+// Initialisation des informations à récupérer
+const firstNameInput = document.getElementById("firstName");
+const lastNameInput = document.getElementById("lastName");
+const addressInput = document.getElementById("address");
+const cityInput = document.getElementById("city");
+const emailInput = document.getElementById("email");
+
