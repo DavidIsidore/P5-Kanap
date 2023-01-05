@@ -70,4 +70,66 @@ targetButton.addEventListener('click', (event) => {
     // à leurs variables respectives
     const productColor = document.getElementById("colors").value;
     const productQuantite = document.getElementById("quantity").value;
-})
+
+    //on définit le contenu du panier
+    //  - en appelant le panier déjà existant
+    //  - ou en créant un tableau vide
+    let basket = JSON.parse(localStorage.getItem("panier")) || [];
+
+    // on vérifie si une couleur ou une quantité n'ont pas été choisies
+    if(!productColor || !productQuantite){
+        //alors on demande à l'utilisateur de choisir couleur et quantité
+        alert("Veuillez choisir une couleur ET une quantité");
+    }else{
+        //si la couleur et la quantité ont été sélectionnées
+        // on regarde si  le panier est vide
+        if(basket == null){
+            // si c'est le cas, on ajoute l'article sélectionné
+            const cart = {
+                productid : id,
+                color : productColor,
+                quantite : Number(productQuantite), // définition de la quantité en tant qu'entier
+            };
+
+            //fonction d'ajout au panier
+            addBasket(cart);
+
+            // on envoie un message confirmant l'ajout
+            window.confirm("Produit ajouté au panier");
+
+        }else{
+            // sinon, on regarde si 2 produits sont similaires
+            const found = basket.find((element) =>
+            // on compare la couleur et l'id sélectionnés avec ceux déjà présents dans le panier
+            element.productid == id && element.color == productColor); 
+            if(found != undefined){
+                //si on trouve une correspondance, on ajoute la quantité précédente à celle sélectionnée
+                let totalQuantity = parseInt(found.quantite) + parseInt(productQuantite);
+                // on réattribue la nouvelle quantité à la quantité trouvée
+                // pour les ajouts ultérieurs
+                found.quantite = totalQuantity;
+                
+                // on enregistre le panier
+                saveBasket(basket);
+
+                // et on envoie un message de confirmation d'ajout à l'utilisateur
+                window.confirm("Produit ajouté au panier");
+            }else{
+                // si le modèle et la couleur n'ont pas déjà été sélectionnés
+                // on définit l'article à ajouter
+                const cart = {
+                    productid : id,
+                    color : productColor,
+                    quantite : Number(productQuantite),
+                }
+                // on ajoute le nouveau produit au panier
+                addBasket(cart);
+
+                // et on envoie un message de confirmation d'ajout à l'utilisateur
+                window.confirm("Produit ajouté au panier");
+
+
+            }
+        }
+    }
+});
