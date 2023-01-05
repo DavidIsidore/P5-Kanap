@@ -114,17 +114,62 @@ fetch("http://localhost:3000/api/products")
                 totalPrice += totPricePerArticle;
                 totalPrice = document.getElementById("totalPrice");
                 totalPrice.innerHTML = totPrice;
-                
-
-
-
-
-
-
-
-
-                           
+                                           
             }
         }
     }
 })
+
+//fonction de callback de supression d'article et de 
+// modification du nombre d'articles
+.then(function(){
+    deleteItem();
+    changeQty();
+})
+
+//fonction de suppression
+function deleteItem() {
+    //sélection de tous les paragraphes ayant la classe deleteItem 
+    const delP = document.querySelectorAll("p.deleteItem");
+    //pour chacun des produits du panier
+    for (let i = 0; i < panier.length; i++) {
+      //on ajoute un écouteur d'évènement sur le bouton Supprimer
+      //et quand on clique dessus
+      delP[i].addEventListener("click", (event) => {
+        //on attribue aux variables l'id et la couleur de l'article sélectionné
+        let idToDelete = panier[i].productid;
+        let colorToDelete = panier[i].color;
+        //on retire l'article et on garde les autres
+        panier = panier.filter(
+          (item) => item.productid != idToDelete || item.color != colorToDelete
+        );
+        //on enregistre le panier
+        localStorage.setItem("panier", JSON.stringify(panier));
+        //on avertit l'utilisateur qu'un produit a été supprimé
+        alert("Produit supprimé du panier");
+  
+        //et on recharge la page
+        window.location.reload();
+      });
+    }
+  }
+
+  //fonction de modification de quantité
+function changeQty() {
+    //sélection de toutes les classes itemQuantity
+    const targetQty = document.querySelectorAll(".itemQuantity");
+  //pour chacune d'entre elles
+    for (let i = 0; i < targetQty.length; i++) {
+      //on ajoute un écouteur d'évènement
+      targetQty[i].addEventListener("input", function () {
+        //qui cible l'élément sélectionné
+        let changeQty = targetQty[i].value;
+        //et modifie sa quantité
+        panier[i].quantite = changeQty;
+        //on enregistre le panier
+        localStorage.setItem("panier", JSON.stringify(panier));
+        //et on recharge la page
+        window.location.reload();
+      });
+    }
+  }
