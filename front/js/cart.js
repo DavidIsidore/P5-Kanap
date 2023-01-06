@@ -64,7 +64,7 @@ fetch("http://localhost:3000/api/products")
                 descr.classList.add("cart__item__content__description");
             /*-----Insertion des informations----*/
                 descr.innerHTML += "<h2>" + `${product.name}` + "</h2>";
-                descr.innerHTML += "<p>" + `${product.color}` + "</p>";
+                descr.innerHTML += "<p>" + `${items.color}` + "</p>";
                 descr.innerHTML += "<p>" + `${product.price}` + "€</p>";
                
      /*--------------Affichage de la quantité--------------------*/
