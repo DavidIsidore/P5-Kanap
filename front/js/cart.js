@@ -108,12 +108,13 @@ fetch("http://localhost:3000/api/products")
                 totQuant.innerHTML = `${totalQuantite}`;
                 
      /*-----------------Calcul du prix total------------------------*/
-                // on multiplie le nombre de chaque article par son prix respectif
-                totPricePerArticle = `${items.quantite}`* product.price;
-                // on incrémente le prix total
-                totalPrice += totPricePerArticle;
-                totalPrice = document.getElementById("totalPrice");
-                totalPrice.innerHTML = totPrice;
+                //on multiplie le nombre d'articles par le prix
+          totPricePerArticle = `${items.quantite}` * product.price;
+          //on incrémente le prix total
+            totPrice+=totPricePerArticle;
+          totalPrice = document.getElementById("totalPrice");
+          //insertion du prix 
+          totalPrice.innerHTML = totPrice;
                                            
             }
         }
@@ -200,8 +201,8 @@ const email = emailInput.value;
 const firstNameErrorMsg = document.getElementById("firstNameErrorMsg");
 const lastNameErrorMsg = document.getElementById("lastNameErrorMsg");
 const addressErrorMsg = document.getElementById("addressErrorMsg");
-const cityErrorMsg = document.getElementById("cityErrorMSg");
-const emailErrorMsg = document.getElementById("emailErrorMSg");
+const cityErrorMsg = document.getElementById("cityErrorMsg");
+const emailErrorMsg = document.getElementById("emailErrorMsg");
 
 /*-----------------Tests de validité des entrées de  l'utilisateur--------------*/
 // Tous les test sont construits de la même façon
@@ -210,7 +211,7 @@ const emailErrorMsg = document.getElementById("emailErrorMSg");
 // Test de validité du prénom
 function validateFirstName(){
     // si le prénom ne correspond pas au format souhaité
-    if(txtRegex.test(firstName) == false) {
+    if(txtRegex.test(firstName) == true) {
         // on affiche le message d'erreur
         firstNameErrorMsg.innerHTML = "Veuillez saisir un format de prénom valide (uniquement des lettres)";
         return false;
@@ -220,7 +221,7 @@ function validateFirstName(){
 }
 
 function validateLastName(){
-    if(txtRegex.test(lastName) == false) {
+    if(txtRegex.test(lastName) == true) {
         lastNameErrorMsg.innerHTML = "Veuillez saisir un format de nom valide (uniquement des lettres)";
         return false;
     }else{
@@ -229,7 +230,7 @@ function validateLastName(){
 }
 
 function validateAddress() {
-    if(addressRegex.test(address) == false) {
+    if(addressRegex.test(address) == true) {
         addressErrorMsg.innerHTML = "Veuillez saisir un format d'adresse valide (lettres et chiffres, pas de symbole spécial)";
         return false;
     }else{
@@ -237,14 +238,14 @@ function validateAddress() {
     }
 }
 
-function validateCity() {
-    if(txtRegex.test(city) == false) {
-        cityErrorMsg.innerHTML = "Veuillez saisir un format de nom de ville valide (uniquement des lettres)";
-        return false;
+function validateCity(){
+    if(txtRegex.test(city) == true){
+      cityErrorMsg.innerHTML = "Veuillez saisir un nom de ville au format valide";
+      return false;
     }else{
-        return true;
+      return true;
     }
-}
+  }
 
 function validateEmail() {
     if(emailRegex.test(email) == true) {
@@ -305,10 +306,10 @@ order.addEventListener('click', event => {
     /*--------Préparation du message à envoyer au back-end---------*/
 
     // on initialise un tableau vide
-    //pour y entrer nes id de commande
+    //pour y entrer les id de commande
     let idCommande = [];
     // pour chaque article du panier
-    for(i=0;i<panier<length;i++) {
+    for(i=0;i<panier.length;i++){
         // on ajoute l'id de l'article au tableau
         idCommande.push(panier[i].productid);
     }
@@ -322,7 +323,7 @@ order.addEventListener('click', event => {
             city : cityInput.value,
             email : emailInput.value
         },
-        products : idCOmmande
+        products : idCommande
     }
 
     // on prépare les paramètres du fetch
