@@ -352,8 +352,7 @@ order.addEventListener('click', event => {
             // on vide le panier
             localStorage.clear();
             // on renvoie sur la page de confirmation
-            document.location.href = './confirmation.html?orderId=${order.orderId}';
-        })
+            window.open("./confirmation.html?orderId="+data.orderId);        })
     }
 
 
