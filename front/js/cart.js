@@ -178,24 +178,13 @@ function changeQty() {
 /*--------------------Contrôle des données envoyées par l'utilisateur---------------*/
 
 // Définition des Regex
-const txtRegex = /^[A-Za-z\s]{5,50}/;
+const txtRegex = /^[A-Za-zéèàùç\s]{5,50}/;
 //const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 const emailRegex = /^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$/;
 const addressRegex = /^[A-Za-z0-9\s]{5,50}$/;
 
-// Initialisation des informations à récupérer
-const firstNameInput = document.getElementById("firstName");
-const lastNameInput = document.getElementById("lastName");
-const addressInput = document.getElementById("address");
-const cityInput = document.getElementById("city");
-const emailInput = document.getElementById("email");
 
-// Récupération des valeurs des champs de saisie
-const firstName = firstNameInput.value;
-const lastName = lastNameInput.value;
-const address = addressInput.value;
-const city = cityInput.value;
-const email = emailInput.value;
+
 
 // Initialisation des messages d'erreur
 const firstNameErrorMsg = document.getElementById("firstNameErrorMsg");
@@ -209,49 +198,57 @@ const emailErrorMsg = document.getElementById("emailErrorMsg");
 // les commentaires du premier sont à adapter aux suivants
 
 // Test de validité du prénom
-function validateFirstName(){
+function validateFirstName(firstName){
     // si le prénom ne correspond pas au format souhaité
-    if(txtRegex.test(firstName) == true) {
+    if(txtRegex.test(firstName) == false) {
         // on affiche le message d'erreur
         firstNameErrorMsg.innerHTML = "Veuillez saisir un format de prénom valide (uniquement des lettres)";
         return false;
     }else{
+        firstNameErrorMsg.innerHTML = "";
         return true;
     }
 }
 
-function validateLastName(){
-    if(txtRegex.test(lastName) == true) {
+function validateLastName(lastName){
+    if(txtRegex.test(lastName) == false) {
         lastNameErrorMsg.innerHTML = "Veuillez saisir un format de nom valide (uniquement des lettres)";
         return false;
     }else{
+        lastNameErrorMsg.innerHTML = "";
         return true;
     }
 }
 
-function validateAddress() {
-    if(addressRegex.test(address) == true) {
+function validateAddress(address){
+    if(addressRegex.test(address) == false) {
         addressErrorMsg.innerHTML = "Veuillez saisir un format d'adresse valide (lettres et chiffres, pas de symbole spécial)";
         return false;
     }else{
+        addressErrorMsg.innerHTML = "";
+
         return true;
     }
 }
 
-function validateCity(){
-    if(txtRegex.test(city) == true){
+function validateCity(city){
+    if(txtRegex.test(city) == false){
       cityErrorMsg.innerHTML = "Veuillez saisir un nom de ville au format valide";
       return false;
     }else{
+        cityErrorMsg.innerHTML = "";
+
       return true;
     }
   }
 
-function validateEmail() {
-    if(emailRegex.test(email) == true) {
+function validateEmail(email) {
+    if(emailRegex.test(email) == false) {
         emailErrorMsg.innerHTML = "Veuillez saisir un format d'adresse mail valide ( exemple@fournisseur.fr)";
         return false;
     }else{
+        emailErrorMsg.innerHTML = "";
+
         return true;
     }
 }
@@ -264,42 +261,61 @@ const order = document.getElementById("order");
 order.addEventListener('click', event => {
     // on empêche le navigateur de changer de page
     event.preventDefault();
+    // Initialisation des informations à récupérer
+const firstNameInput = document.getElementById("firstName");
+const lastNameInput = document.getElementById("lastName");
+const addressInput = document.getElementById("address");
+const cityInput = document.getElementById("city");
+const emailInput = document.getElementById("email");
+
+    // Récupération des valeurs des champs de saisie
+const firstName = firstNameInput.value;
+const lastName = lastNameInput.value;
+const address = addressInput.value;
+const city = cityInput.value;
+const email = emailInput.value;
     // on passe l'indicateur d'erreur à FAUX
     let setError = false;
+    console.log(validateFirstName(firstName));
+    console.log(validateLastName(lastName));
+    console.log(validateAddress(address));
+    console.log(validateCity(city));
+    console.log(validateEmail(email));
+
+    console.log(firstName);
 
     //Validation du prénom
     //si le format de prénom n'est pas validé
-    if(!validateFirstName()){
+    if(!validateFirstName(firstName)){
         // on passe l'indicateur d'erreur à VRAI
         setError = true;
     }
 
     //Validation du nom
-    if(!validateLastName()){
+    if(!validateLastName(lastName)){
         setError = true;
     }
 
     // Validation de l'adresse
-    if(!validateAddress()) {
+    if(!validateAddress(address)) {
         setError = true;
     }
 
     // Validation de la ville
-    if(!validateCity()) {
+    if(!validateCity(city)) {
         setError = true;
     }
 
     // Validation de l'adresse email
-    if(!validateEmail()) {
+    if(!validateEmail(email)) {
         setError = true;
     }
-
     // Si une erreur est détectée
     if(setError){
-        event.preventDefault();
+       
         // on envoie un message d'erreur en demandant à remplir tous les champs
         alert("Veuillez remplir tous les champs");
-        return (false);
+        return false;
     }
 
 
